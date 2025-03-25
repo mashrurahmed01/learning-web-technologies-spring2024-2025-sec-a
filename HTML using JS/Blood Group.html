@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+    <title>Blood Group</title>
+</head>
+<body>
+    <h1 id="abc">Blood Group</h1>
+
+<form action="Blood Group.html" onsubmit="return validate()">
+    
+    <select name="bloodGroup" id="bg">
+        <option value="aP">A+</option>
+        <option value="aN">A-</option>
+        <option value="bP">B+</option>
+        <option value="bN">B-</option>
+        <option value="oP">O+</option>
+        <option value="oN">O-</option>
+        <option value="abP">AB+</option>
+        <option value="abN">AB-</option>
+      </select>
+      
+
+
+    <input type="submit" name="submit" id="submit" value="submit" />
+</form>
+    <script>
+function isValidName(name){
+
+    for (let i=0; i , name.length; i++){
+        let char = name[i];
+        let charCode = char.charCodeAt(0);
+
+        if (
+            !(charCode >= 65 && charCode <= 90 ) &&
+            !(charCode >= 97 && charCode <= 122 ) &&
+            char !== '.' && char !== '-'
+
+        ){return false;}
+
+        
+    } return true;
+}
+function validate() {
+    let name = document.getElementById("name").value;
+    
+    if (name === "") {
+        alert("Name cannot be empty.");
+        return false;
+    }
+    var values = name.split(' ').filter(function(v){return v!==''});
+    
+    if (values.length < 1 ) {
+        alert("Enter First & Last Name.");
+        return false;
+    }
+
+    if (name.charAt(0) == '.' || name.charAt(0) == '-'){
+        alert("Must start with a letter.");
+        return false;
+    }
+
+    if (isValidName(name) == false ){
+        alert("Must start with a letter.");
+        return false;
+    }
+
+    
+    return true;
+
+}
+    </script>
+
+</body>

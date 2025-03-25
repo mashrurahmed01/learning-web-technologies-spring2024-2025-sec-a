@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+    <title>Gender</title>
+</head>
+<body>
+    <h1 id="abc">Gender</h1>
+
+<form action="gender.html" onsubmit="return validate()">
+  <input type="radio" id="male" name="Gender" value="Male">
+  <label for="male">Male</label>
+  <input type="radio" id="female" name="Gender" value="Female">
+  <label for="female">Female</label>
+  <input type="radio" id="other" name="Gender" value="Other">
+  <label for="other">Other</label>
+  <br>
+    <input type="submit" name="submit" id="submit" value="submit" />
+</form>
+    <script>
+function isValidName(name){
+
+    for (let i=0; i , name.length; i++){
+        let char = name[i];
+        let charCode = char.charCodeAt(0);
+
+        if (
+            !(charCode >= 65 && charCode <= 90 ) &&
+            !(charCode >= 97 && charCode <= 122 ) &&
+            char !== '.' && char !== '-'
+
+        ){return false;}
+
+        
+    } return true;
+}
+function validate() {
+    let name = document.getElementById("name").value;
+    
+    if (name === "") {
+        alert("Name cannot be empty.");
+        return false;
+    }
+    var values = name.split(' ').filter(function(v){return v!==''});
+    
+    if (values.length < 1 ) {
+        alert("Enter First & Last Name.");
+        return false;
+    }
+
+    if (name.charAt(0) == '.' || name.charAt(0) == '-'){
+        alert("Must start with a letter.");
+        return false;
+    }
+
+    if (isValidName(name) == false ){
+        alert("Must start with a letter.");
+        return false;
+    }
+
+    
+    return true;
+
+}
+    </script>
+
+</body>
