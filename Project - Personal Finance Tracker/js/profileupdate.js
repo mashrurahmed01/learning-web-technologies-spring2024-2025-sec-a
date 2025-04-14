@@ -51,4 +51,4 @@ document.addEventListener('DOMContentLoaded', function () {
         const errors = document.querySelectorAll('.input-error');
         errors.forEach(err => err.remove());
     }
-});
+}); 
