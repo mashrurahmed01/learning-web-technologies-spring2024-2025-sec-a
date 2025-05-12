@@ -1,5 +1,5 @@
 div.sidebar {
-    width: 7%;  
+    width: 10%;  
     height: 100vh;  
     float: left;  
     background-color: #5f47fb;  
@@ -36,7 +36,7 @@ div.title {
     text-align: center;  
     position:relative;
     top: 0px;
-    left: 720px;
+    left: 520px;
     border-radius: 5px;  
 }
 
