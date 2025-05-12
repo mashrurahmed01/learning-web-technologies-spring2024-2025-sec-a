@@ -1,63 +1,42 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Profile Picture</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User ID & Picture Validation</title>
 </head>
 <body>
-    <h1 id="abc">Profile Picture</h1>
 
-<form action="Profile Picture.html" onsubmit="return validate()">
-    <input type="number" name="id" id="id" value=""  />
-    <p id="nmsg"></p>
+<form>
+    <label for="userId">User ID:</label><br>
+    <input type="number" id="userId"><br>
 
-    <label for="cv">Picture:</label>
-<input type="file" id="pic" name="pic"> <br>
-    <input type="submit" name="submit" id="submit" value="submit" />
+    <label for="picture">Upload Picture:</label><br>
+    <input type="file" id="picture"><br>
+
+    <button type="button" onclick="validateUser()">Submit</button>
+    <p id="error" style="color: red;"></p>
 </form>
-    <script>
-function isValidName(name){
 
-    for (let i=0; i , name.length; i++){
-        let char = name[i];
-        let charCode = char.charCodeAt(0);
+<script>
+    function validateUser() {
+        let userId = document.getElementById("userId").value;
+        let picture = document.getElementById("picture").files.length;
+        let error = document.getElementById("error");
 
-        if (
-            !(charCode >= 65 && charCode <= 90 ) &&
-            !(charCode >= 97 && charCode <= 122 ) &&
-            char !== '.' && char !== '-'
+        if (userId <= 0) {
+            error.innerHTML = "must be a positive number";
+            return;
+        }
+        if (picture === 0) {
+            error.innerHTML = "Please upload a picture";
+            return;
+        }
 
-        ){return false;}
-
-        
-    } return true;
-}
-function validate() {
-    let name = document.getElementById("name").value;
-    
-    if (name === "") {
-        alert("Name cannot be empty.");
-        return false;
+        error.innerHTML = "";
+        alert("Valid Input");
     }
-    var values = name.split(' ').filter(function(v){return v!==''});
-    
-    if (values.length < 1 ) {
-        alert("Enter First & Last Name.");
-        return false;
-    }
-
-    if (name.charAt(0) == '.' || name.charAt(0) == '-'){
-        alert("Must start with a letter.");
-        return false;
-    }
-
-    if (isValidName(name) == false ){
-        alert("Must start with a letter.");
-        return false;
-    }
-
-    
-    return true;
-
-}
-    </script>
+</script>
 
 </body>
+</html>

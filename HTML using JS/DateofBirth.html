@@ -1,60 +1,70 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Date Of Birth</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Validation</title>
 </head>
 <body>
-    <h1 id="abc">Date Of Birth</h1>
 
-<form action="DateofBirth.html" onsubmit="return validate()">
-   
-        <input type="date" id="dob"><br>
-        <input type="submit" name="submit" id="submit" value="submit" />
+<form>
+    <label for="date">Date (dd-mm-yyyy):</label><br>
+    <input type="text" id="date">
+    <button type="button" onclick="validateDate()">Submit</button>
+    <p id="error" style="color: red;"></p>
 </form>
-    <script>
-function isValidName(name){
 
-    for (let i=0; i , name.length; i++){
-        let char = name[i];
-        let charCode = char.charCodeAt(0);
-
-        if (
-            !(charCode >= 65 && charCode <= 90 ) &&
-            !(charCode >= 97 && charCode <= 122 ) &&
-            char !== '.' && char !== '-'
-
-        ){return false;}
+<script>
+    function validateDate() {
+        let dateStr = document.getElementById("date").value.trim();
+        let error = document.getElementById("error");
 
         
-    } return true;
-}
-function validate() {
-    let name = document.getElementById("name").value;
-    
-    if (name === "") {
-        alert("Name cannot be empty.");
-        return false;
-    }
-    var values = name.split(' ').filter(function(v){return v!==''});
-    
-    if (values.length < 1 ) {
-        alert("Enter First & Last Name.");
-        return false;
+        let parts = dateStr.split("-");
+        if (parts.length !== 3) {
+            error.innerHTML = "Date format should be dd-mm-yyyy.";
+            return;
+        }
+
+        let day = parseInt(parts[0], 10);
+        let month = parseInt(parts[1], 10);
+        let year = parseInt(parts[2], 10);
+
+       
+        if (isNaN(day) || isNaN(month) || isNaN(year)) {
+            error.innerHTML = "Day, month, and year must be numbers.";
+            return;
+        }
+
+        if (day < 1 || day > 31) {
+            error.innerHTML = "Day must be between 1 and 31.";
+            return;
+        }
+
+        if (month < 1 || month > 12) {
+            error.innerHTML = "Month must be between 1 and 12.";
+            return;
+        }
+
+        if (year < 1900 || year > 2016) {
+            error.innerHTML = "Year must be between 1900 and 2016.";
+            return;
+        }
+
+        let daysInMonth = [31, (isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        if (day > daysInMonth[month - 1]) {
+            error.innerHTML = "Invalid day for the given month.";
+            return;
+        }
+
+        error.innerHTML = "";
+        alert("Valid Date: " + dateStr);
     }
 
-    if (name.charAt(0) == '.' || name.charAt(0) == '-'){
-        alert("Must start with a letter.");
-        return false;
+    function isLeapYear(year) {
+        return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
     }
-
-    if (isValidName(name) == false ){
-        alert("Must start with a letter.");
-        return false;
-    }
-
-    
-    return true;
-
-}
-    </script>
+</script>
 
 </body>
+</html>
